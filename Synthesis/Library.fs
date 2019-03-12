@@ -96,8 +96,26 @@ let toBinary n =
 let bizFuzz _ =
     failwith "Not implemented"
 
-let monthDay _ _ =
-    failwith "Not implemented"
+let getMonth n = 
+    let (st,_) = month n
+    st
+
+let monthDay d y =
+    match d>0 && d<367 with
+    |false -> failwith "Day is out of range"
+    |true -> 
+        match isLeap y with
+        |false ->
+            match d=366 with
+            |true -> failwith "Day is out of range because it is not a leap year"
+            |false ->
+                match d<31 with
+                |true ->  getMonth 1
+                |_ -> "SOMEEVEBER"
+        |true -> failwith "Incomplete"
+    
+
+    
 
 let coord _ =
     failwith "Not implemented"
